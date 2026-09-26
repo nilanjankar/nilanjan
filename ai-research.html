@@ -137,6 +137,7 @@
             -webkit-line-clamp: 4; /* Limit description to 3 lines (adjust as needed) */
             line-clamp: 4; /* Add this line for standard compatibility */
             -webkit-box-orient: vertical;
+            overflow: hidden; /* Needed for the line clamp to actually hide overflow */
             word-wrap: break-word; /* Ensure long words break */
         }
 
@@ -149,27 +150,46 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            body {
+                margin: 16px;
+            }
             .bookshelf-container {
                 gap: 20px;
+                padding: 15px 10px 45px;
             }
+            /* Let books grow to fit their text instead of clipping it */
             .book {
-                width: 120px;
-                height: 180px;
+                width: 150px;
+                height: auto;
+                min-height: 180px;
+                padding: 32px 10px 12px; /* Top room for the BETA/DEMO badge */
+            }
+            .book-title,
+            .book-description {
+                display: block;
+                -webkit-line-clamp: unset;
+                line-clamp: unset;
+                overflow: visible;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
         }
         @media (max-width: 480px) {
             .bookshelf-container {
-                gap: 15px;
+                gap: 12px;
             }
             .book {
-                width: 100px;
-                height: 150px;
+                width: 125px; /* Two books per row even on 320px-wide phones */
+                min-height: 160px;
             }
             .book-title {
-                font-size: 0.9em;
+                font-size: 0.95em;
             }
             .book-description {
-                font-size: 0.7em;
+                font-size: 0.75em;
+            }
+            .try-app-link {
+                font-size: 0.8em; /* Keep the demo link no wider than its book */
             }
         }
     </style>
@@ -231,11 +251,12 @@
                     <hr>
                     <div class="book-description"> Demo : Real-time multilingual voice → LLM → Voice pipeline in applied AI research</div>
                     <div class="book-description" style="margin-top: 10px;"><Strong>(Blog)</Strong></div>
-                    <a href="https://voicebot.smarttechassist.com/" target="_blank" class="try-app-link">
-                        🔗 Prototype Demo
-                        </a>
-                    
                 </a>
+                <div style="margin-top: 6px;">
+                    <a href="https://voicebot.smarttechassist.com/" target="_blank" class="try-app-link">
+                    🔗 Prototype Demo
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -250,9 +271,13 @@
                 <div class="book-title">SpatialScene</div>
                 <div class="book-description">Visualize 3D Scenes from Natural Language.</div>
             </a>
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7322378" target="_blank" class="book color-red">
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7322378" target="_blank" class="book color-blue">
                 <div class="book-title">Grounded AI</div>
                 <div class="book-description">Grounding LLM output to deterministic facts</div>
+            </a>
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7500181" target="_blank" class="book color-green">
+                <div class="book-title">Structured &amp; Closed-Set Inputs</div>
+                <div class="book-description">Capturing user intent more accurately for LLMs</div>
             </a>
         </div>
     </div>
